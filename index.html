@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simulador Catraca Topdata</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Controles EXTERNOS (fora da catraca) -->
+    <div class="toolbar">
+        <button class="btn ext" id="comboBtn" title="Simula pressionar F+1+9" onclick="enterMenuCombo()">
+            F + 1 + 9</button>
+        <button class="btn ext ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <!-- CATRACA -->
+    <main class="panel">
+
+        <!-- faixa superior com seta e “logo” -->
+        <div class="top-strip">
+            <img src="./imgs/seta.png" alt="" id="setaDaEsquerda">
+            <div class="lcd" id="display">Passe o cartão…</div>
+            <img src="./imgs/seta.png" alt="" id="setaDaDireita">
+        </div>
+
+        <!-- teclado e controles -->
+        <div class="controls-wrap">
+
+            <div class="keypad">
+                <button class="key" onclick="press('1')">1</button>
+                <button class="key" onclick="press('2')">2</button>
+                <button class="key" onclick="press('3')">3</button>
+                <button class="key" onclick="press('F')">F</button>
+
+                <button class="key" onclick="press('4')">4</button>
+                <button class="key" onclick="press('5')">5</button>
+                <button class="key" onclick="press('6')">6</button>
+                <button class="key" onclick="press('LEFT')" aria-label="Esquerda">▲</button>
+
+                <button class="key" onclick="press('7')">7</button>
+                <button class="key" onclick="press('8')">8</button>
+                <button class="key" onclick="press('9')">9</button>
+                <button class="key" onclick="press('RIGHT')" aria-label="Direita">▼</button>
+
+                <button class="key" onclick="press('ESC')">ESC</button>
+                <button class="key" onclick="press('0')">0</button>
+                <button class="key" onclick="press('OK')">OK</button>
+                <button class="key" onclick="press('MENU')">Menu</button>
+            </div>
+        </div>
+        <img src="./imgs/iconCard.png" alt="" id="cardIcon">
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

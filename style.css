@@ -1,0 +1,239 @@
+:root {
+    --plastic: #3e4046;
+    --plastic-hi: #4a4f57;
+    --shadow: rgba(0, 0, 0, .55);
+    --lcd: #0b3a86;
+    --lcd-text: #bfe7ff;
+    --btn: #5b606b;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+}
+
+
+body {
+    margin: 0;
+    padding: 24px 16px 40px;
+    background: #1f2227 radial-gradient(circle at 50% 15%, #272b32 0, #1f2227 55%, #15181c 100%);
+    font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    color: #e6e6e6;
+}
+
+/* barra externa */
+.toolbar {
+    width: min(700px, 92vw);
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: var(--btn);
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 10px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 14px var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, .06);
+    transition: transform .04s ease, filter .2s ease, background .2s ease;
+}
+
+.btn:hover {
+    filter: brightness(1.06);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn.ext {
+    border-radius: 999px;
+    padding: 11px 18px;
+}
+
+.btn.ext.ghost {
+    background: #444a;
+}
+
+
+.btn.wide {
+    width: 100%;
+}
+
+.btn.danger {
+    background: var(--esc);
+}
+
+/* painel da catraca */
+.panel {
+    position: relative;
+    width: min(900px, 96vw);
+    aspect-ratio: 1.4 / 1;
+    /* proporção parecida */
+    background: linear-gradient(180deg, var(--plastic-hi), var(--plastic));
+    border-radius: 35px;
+    box-shadow: 0 20px 60px var(--shadow), inset 0 0 40px rgba(255, 255, 255, .05);
+    padding: 18px 22px 22px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+
+/* “calombo” superior */
+.top-bump {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 32px;
+    border-radius: 14px 14px 6px 6px;
+    background: linear-gradient(180deg, #4f5560, #3b3f47);
+    box-shadow: 0 12px 20px var(--shadow);
+}
+
+/* faixa com lcd */
+.top-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    background: #33393f;
+    border-radius: 20px;
+    padding: 10px 12px;
+    box-shadow: inset 0 0 20px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+    padding: 0px;
+}
+
+.arrow-led {
+    justify-self: start;
+    width: 42px;
+    height: 28px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: #0a3;
+    font-size: 18px;
+    background: linear-gradient(180deg, #0a4, #083);
+    box-shadow: 0 0 12px #0a45 inset;
+}
+
+.brand {
+    justify-self: end;
+    opacity: .85;
+    font-size: 12px;
+    letter-spacing: .6px;
+    background: #ffffff10;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.lcd {
+    background: linear-gradient(180deg, #0c4ea8, var(--lcd));
+    color: var(--lcd-text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    border-radius: 10px;
+    padding: 10px 12px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -4px 10px rgba(0, 0, 0, .35), inset 0 0 0 2px rgba(255, 255, 255, .09);
+    white-space: pre-line;
+    font-weight: 700;
+    height: 60px;
+    width: 250px;
+}
+
+/* área dos botões */
+.controls-wrap {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+    padding: 14px 10px 6px;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    gap: 10px;
+}
+
+.nav .btn {
+    border-radius: 14px;
+    padding: 12px 0;
+}
+
+.nav .btn:nth-child(2) {
+    background: #6b7280;
+}
+
+.keypad {
+    margin-inline: auto;
+    width: min(340px, 88%);
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 20px;
+}
+
+.key {
+    background: linear-gradient(180deg, #636a77, #4f5563);
+    border: none;
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    border-radius: 50px;
+    padding: 14px 0;
+    cursor: pointer;
+    box-shadow: 0 8px 18px var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, .07);
+    transition: transform .05s ease, filter .2s ease;
+    width: 65px;
+}
+
+.key:hover {
+    filter: brightness(1.07);
+}
+
+.key:active {
+    transform: translateY(2px);
+}
+
+#cardIcon {
+    display: block;
+    margin: 0 auto;
+    /* centraliza horizontalmente */
+    width: 150px;
+}
+
+#setaDaEsquerda {
+    width: 150px;
+}
+
+#setaDaDireita {
+    width: 150px;
+    transform: scaleX(-1);
+}
+
+@media (max-width:420px) {
+    .lcd {
+        font-size: 14px;
+    }
+
+    .key {
+        font-size: 18px;
+        padding: 12px 0;
+    }
+}
