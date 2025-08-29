@@ -158,6 +158,18 @@ function press(key) {
                 flashMessage("Valor salvo: " + inputBuffer, "submenu", 1500);
             }
             break;
+
+        case "IPdoServidor":
+        case "IPdoInner":
+            if (!isNaN(key) || key === ".") {
+                inputBuffer += key;
+                setText((state === "IPdoServidor" ? "IP do servidor:\n" : "IP do inner:\n") + inputBuffer + "_");
+            } else if (key === "ESC") {
+                showSub();
+            } else if (key === "OK") {
+                flashMessage("Valor salvo: " + inputBuffer, "submenu", 1500);
+            }
+            break;
     }
 }
 
@@ -187,10 +199,27 @@ function executeAction() {
         }
     }
     if (menuName === "Rede") {
-        if (item.includes("IP")) {
-            showInput("Digite valor:");
-            return;
+        switch (item) {
+            case "IP do Servidor":
+                showInput("IP do servidor:");
+                state = "IPdoServidor";
+                return;
+            case "IP do Inner":
+                showInput("IP do inner:");
+                state = "IPdoInner";
+                return;
+            case "Máscara":
+                showInput("Máscara de rede:");
+                return;
+            case "Gateway":
+                showInput("Gateway:");
+                return;
+            case "Porta Servidor":
+                showInput("Porta do servidor:");
+                return;
         }
+
+        // Se não for nenhum desses específicos
         flashMessage("Configuração: " + item + "\n(simulado)", "submenu", 1200);
         return;
     }
