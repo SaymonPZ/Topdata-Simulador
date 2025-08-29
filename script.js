@@ -59,7 +59,6 @@ function showSub() {
 function showInput(prompt, initial = "") {
     inputBuffer = initial;
     setText(prompt + "\n" + inputBuffer + "_");
-    state = "input";
 }
 function flashMessage(msg, backTo = "menu", ms = 1100) {
     setText(msg);
@@ -69,6 +68,10 @@ function flashMessage(msg, backTo = "menu", ms = 1100) {
         else showIdle();
     }, ms);
 }
+
+// =========================
+// Formatação
+// =========================
 function formatarDataAtual() {
     const meses = ["jan", "fev", "mar", "abr", "mai", "jun",
         "jul", "ago", "set", "out", "nov", "dez"];
@@ -83,6 +86,17 @@ function formatarDataAtual() {
     const ss = String(agora.getSeconds()).padStart(2, "0");
 
     return `${dia} ${mes} ${ano} ${hh}:${mm}:${ss}`;
+}
+function formatIp(raw) {
+
+    // Limita no máximo a 12 dígitos (4 blocos de até 3 números)
+    raw = raw.slice(0, 12);
+
+    // Divide em grupos de até 3
+    let parts = raw.match(/.{1,3}/g) || [];
+
+    // Junta com pontos
+    return parts.join(".");
 }
 
 // =========================
@@ -148,26 +162,18 @@ function press(key) {
             break;
 
         // Entrada de dados (senha/IP/etc)
-        case "input":
-            if (!isNaN(key) || key === ".") {
-                inputBuffer += key;
-                setText("Digite valor:\n" + inputBuffer + "_");
-            } else if (key === "ESC") {
-                showSub();
-            } else if (key === "OK") {
-                flashMessage("Valor salvo: " + inputBuffer, "submenu", 1500);
-            }
-            break;
 
         case "IPdoServidor":
         case "IPdoInner":
-            if (!isNaN(key) || key === ".") {
+            if (!isNaN(key)) {
                 inputBuffer += key;
-                setText((state === "IPdoServidor" ? "IP do servidor:\n" : "IP do inner:\n") + inputBuffer + "_");
+                const ipFormatado = formatIp(inputBuffer);
+                setText((state === "IPdoServidor" ? "IP do servidor:\n" : "IP do inner:\n") + ipFormatado + "_");
             } else if (key === "ESC") {
                 showSub();
             } else if (key === "OK") {
-                flashMessage("Valor salvo: " + inputBuffer, "submenu", 1500);
+                const ipFormatado = formatIp(inputBuffer);
+                flashMessage("Valor salvo: " + ipFormatado, "submenu", 1500);
             }
             break;
     }
