@@ -4,6 +4,7 @@ let state = "idle";
 let mainIndex = 0;
 let subIndex = 0;
 let inputBuffer = ""; // guarda números digitados
+let editing = false; // esta no menu está editando um valor
 const senhaCorreta = "1234"; // senha simulada
 
 const menus = [
@@ -166,7 +167,14 @@ function press(key) {
         case "IPdoServidor":
         case "IPdoInner":
             if (!isNaN(key)) {
-                inputBuffer += key;
+                if (!editing) {
+                    // Primeira tecla: apaga o valor inicial
+                    inputBuffer = key;
+                    editing = true;
+                } else {
+                    // Próximas teclas: vai adicionando
+                    inputBuffer += key;
+                }
                 const ipFormatado = formatIp(inputBuffer);
                 setText((state === "IPdoServidor" ? "IP do servidor:\n" : "IP do inner:\n") + ipFormatado + "_");
             } else if (key === "ESC") {
@@ -207,11 +215,11 @@ function executeAction() {
     if (menuName === "Rede") {
         switch (item) {
             case "IP do Servidor":
-                showInput("IP do servidor:");
+                showInput("IP do servidor:", "192.168.001.100");
                 state = "IPdoServidor";
                 return;
             case "IP do Inner":
-                showInput("IP do inner:");
+                showInput("IP do inner:", "192.168.001.125");
                 state = "IPdoInner";
                 return;
             case "Máscara":
