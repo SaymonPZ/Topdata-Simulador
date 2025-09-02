@@ -271,11 +271,9 @@ function registerManualCombo(key) {
 }
 
 function enterMenuCombo() {
-    if (state === "idle" || state === "awaitCombo") {
-        mainIndex = 0;
-        showMain();
-    } else {
-        flashMessage("Já está no Menu Master.");
+    if (state === "menu" || state === "awaitCombo") {
+            mainIndex = 0;
+            showMain();
     }
 }
 function resetAll() {
