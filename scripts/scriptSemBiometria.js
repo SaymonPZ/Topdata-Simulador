@@ -179,9 +179,11 @@ function press(key) {
                 setText((state === "IPdoServidor" ? "IP do servidor:\n" : "IP do inner:\n") + ipFormatado + "_");
             } else if (key === "ESC") {
                 showSub();
+                editing = false;
             } else if (key === "OK") {
                 const ipFormatado = formatIp(inputBuffer);
                 flashMessage("Valor salvo: " + ipFormatado, "submenu", 1500);
+                editing = false;
             }
             break;
     }
@@ -272,8 +274,8 @@ function registerManualCombo(key) {
 
 function enterMenuCombo() {
     if (state === "menu" || state === "awaitCombo") {
-            mainIndex = 0;
-            showMain();
+        mainIndex = 0;
+        showMain();
     }
 }
 function resetAll() {
