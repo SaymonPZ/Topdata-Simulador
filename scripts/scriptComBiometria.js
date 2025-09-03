@@ -9,6 +9,7 @@ const senhaCorreta = "1234"; // senha simulada
 
 const menus = [
     { name: "Libera 30s", items: ["Liberar usuário (30s)"] },
+    { name: "Biometria", items: ["Inclui usuário", "Testa usuário", "Exclui usuário", "Exclui identif", "Exclui todos"] },
     { name: "Testa Cartão", items: ["Passe/aproxime o cartão…"] },
     { name: "Informações", items: ["Exibir MAC", "Exibir Serial", "Contador de giros", "Versão firmware", "PCI Catraca", "Modelo Biometria"] },
     { name: "Rede", items: ["IP do Servidor", "DHCP", "IP do Inner", "Máscara", "Gateway", "Porta Servidor", "Número do Inner", "Login Web Server"] },
@@ -112,7 +113,11 @@ function press(key) {
             } else if (key === "OK" && inputBuffer.length > 0) {
                 if (inputBuffer === senhaCorreta) {
                     flashMessage("ACESSO LIBERADO", "idle", 1500);
-                } else {
+                } else if (inputBuffer === "0") {
+                    state = "menu";
+                    enterMenuCombo();
+                }
+                else {
                     flashMessage("SENHA INCORRETA", "idle", 1500);
                 }
             } else if (key === "MENU") {
